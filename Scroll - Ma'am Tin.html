@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Letter of Appreciation</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap');
+
+    body {
+    margin: 0;
+    height: 100vh;
+    background: radial-gradient(circle at center, #d8c59b 0%, #8a6b3a 80%);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow: hidden;
+  }
+
+  .scroll-container {
+    position: relative;
+    width: 850px;
+    height: 280px;
+    perspective: 1500px;
+    margin-top: 60px;
+    transform: translateY(-60px);
+  }
+
+  .scroll {
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(#f3e0b3, #e1c78f);
+    background: radial-gradient(circle at 40% 40%, #f8e8b8 0%, #b08840 30%, #4b2c0f 90%);
+    background-size: cover;
+    background-position: center;
+    border: 4px double black;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    overflow: hidden;
+    transform-origin: top;
+    top: 30px;
+    transition: height 1.8s cubic-bezier(0.68, -0.55, 0.27, 1.55),
+                box-shadow 0.8s ease;
+    cursor: default;
+  }
+
+  .scroll.open {
+    height: 650px;
+  }
+
+  /* Scroll Top Rod */
+  .scroll::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: 0;
+    width: 100%;
+    height: 25px;
+    background: radial-gradient(circle, #b58a42, #6b4a1e);
+    box-shadow: 0 6px 10px rgba(0,0,0,0.3);
+  }
+
+  /* Scroll Bottom Rod with clickable indicator */
+  .scroll::after {
+    content: '⇅ Press to Open/Close';
+    position: absolute;
+    bottom: -45px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    height: 40px;
+    background: radial-gradient(circle, #b58a42, #6b4a1e);
+    color: #f5e4b2;
+    text-align: center;
+    line-height: 40px;
+    font-family: 'Cinzel', serif;
+    font-size: 16px;
+    box-shadow: 0 -5px 10px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    animation: glowPulse 1.5s infinite ease-in-out;
+  }
+
+  /* Glowing pulse animation */
+  @keyframes glowPulse {
+    0%, 100% { box-shadow: 0 0 10px 2px rgba(255, 227, 140, 0.7); }
+    50% { box-shadow: 0 0 20px 5px rgba(255, 245, 180, 0.9); }
+  }
+
+  /* Hover effect for better feedback */
+  .scroll::after:hover {
+    transform: translateX(-50%) scale(1.05);
+    background: radial-gradient(circle, #c69e56, #7a541f);
+  }
+
+  /* Optional floating arrow indicator */
+  .indicator {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 30px;
+    color: #fff5cc;
+    text-shadow: 0 0 10px rgba(255, 220, 100, 0.8);
+    animation: bounce 1.2s infinite;
+    pointer-events: none;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translate(-50%, 0); opacity: 0.8; }
+    50% { transform: translate(-50%, -10px); opacity: 1; }
+  }
+
+  .message {
+    position: absolute;
+    width: auto;
+    top: 50px;
+    left: 40px;
+    right: 40px;
+    bottom: 80px;
+    opacity: 0;
+    transform: translateY(-10px);
+    color: #3e2c00;
+    font-size: 13px;
+    line-height: 1.6;
+    text-align: justify;
+    font-family: 'Cinzel', serif;
+    background: rgba(255, 249, 229, 0.85);
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: inset 0 0 25px rgba(0,0,0,0.25);
+    transition: opacity 1.2s ease, transform 1.2s ease;
+     overflow-y: auto;              /* ✅ Enables vertical scrolling */
+        scrollbar-width: thin;         /* Firefox */
+        scrollbar-color: #b8860b #fffaf0;
+  }
+
+  .scroll.open .message {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 1s;
+  }
+
+  /* Torn edge effect */
+  .scroll {
+    clip-path: polygon(
+      0% 0%, 100% 0%,
+      100% 97%, 98% 100%,
+      2% 100%, 0% 97%
+    );
+  }
+@keyframes floatDust {
+  0% { transform: translateY(0) translateX(0); opacity: 0.7; }
+  50% { transform: translateY(-20px) translateX(10px); opacity: 1; }
+  100% { transform: translateY(0) translateX(0); opacity: 0.7; }
+}
+
+.particle {
+  position: absolute;
+  background: radial-gradient(circle, #fff6c4 0%, transparent 70%);
+  border-radius: 50%;
+  width: 6px;
+  height: 6px;
+  animation: floatDust 6s ease-in-out infinite;
+  opacity: 0.8;
+}
+
+.scroll-container::before {
+  content: '';
+  position: absolute;
+  inset: -40px;
+  background: radial-gradient(circle, rgba(255, 240, 180, 0.15), transparent 80%);
+  filter: blur(20px);
+  animation: glowAura 4s ease-in-out infinite;
+}
+
+@keyframes glowAura {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.9; }
+}
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+.sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: gold;
+  border-radius: 50%;
+  animation: sparkle 1.5s ease-in-out infinite;
+}
+@keyframes flicker {
+  0%, 100% { opacity: 0.8; filter: blur(6px); }
+  50% { opacity: 1; filter: blur(8px); }
+}
+
+.candlelight {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(255,210,120,0.35), transparent 70%);
+  border-radius: 50%;
+  animation: flicker 2s ease-in-out infinite;
+}
+@keyframes featherDrift {
+  0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+  100% { transform: translate(-40px, 800px) rotate(120deg); opacity: 0; }
+}
+
+.feather {
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  width: 60px;
+  opacity: 0.9;
+  animation: featherDrift 12s linear infinite;
+}
+/* Dropping Particles */
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.particle {
+  position: absolute;
+  top: -10px;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle, #fff8c9 0%, #d7b24a 70%, transparent 100%);
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) translateX(30px) scale(0.8);
+    opacity: 0;
+  }
+}
+
+/* === Responsive Adjustments === */
+@media (max-width: 768px) {
+  .scroll-container {
+    width: 95%;
+    margin-top: 40px;
+  }
+
+  .scroll {
+    height: 200px;
+  }
+
+  .scroll.open {
+    height: 100vh;
+  }
+
+  .message {
+    font-size: 12px;
+    padding: 20px;
+  }
+
+  .scroll::after {
+    font-size: 14px;
+    width: 300px;
+    height: 36px;
+    line-height: 36px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .scroll.open {
+    max-height: 750px;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="scroll-container">
+  <div class="scroll" id="scroll">
+    <div class="message">
+      <h1 style="text-align: center; color: black;">Letter of Appreciation</h1>
+       <p>
+        Dear Ma'am Tin, <br><br>
+
+       Ma'am Tin, Thank you so much ma'am, i will miss our time and bonding. Thank you sa effort sa audit and PSP naton. Thank you mn ma'am sa mga baisay ta kag audit analysis kung diin naenjoy ko gd kay may another perspective. Kaon ta liwat sa sunod ma'am! hahaha kalilingaw abi sunlugon si jeff. We miss youuu ma'am!  <br><br>
+          </p>
+
+      <h3 style="color:black; text-align: right; line-height: 1px;">With Sincere Appreciation,</h3>
+      <h2 style="color:black; text-align: right;">Hans</h2>
+    </div>
+  <div class="indicator">⬆</div>
+  </div>
+</div>
+
+<div class="particle" style="top:20%; left:30%; animation-delay:0s;"></div>
+<div class="particle" style="top:40%; left:60%; animation-delay:2s;"></div>
+<div class="particle" style="top:70%; left:45%; animation-delay:4s;"></div>
+<div class="sparkle" style="top:10%; left:40%; animation-delay:0s;"></div>
+<div class="sparkle" style="top:25%; left:70%; animation-delay:1s;"></div>
+<div class="sparkle" style="top:60%; left:20%; animation-delay:2s;"></div>
+<div class="candlelight" style="top: 60px; left: 10px;"></div>
+<div class="candlelight" style="bottom: 60px; right: 10px;"></div>
+<div class="particles"></div>
+
+<script>
+  const scroll = document.getElementById('scroll');
+  let isOpen = false;
+
+  scroll.addEventListener('click', (e) => {
+    const rect = scroll.getBoundingClientRect();
+    const clickY = e.clientY - rect.top;
+
+    // Only allow toggling if clicked near the bottom rod area
+    if (clickY > rect.height - 80) {
+      isOpen = !isOpen;
+      scroll.classList.toggle('open', isOpen);
+    }
+  });
+</script>
+<canvas id="goldParticles"></canvas>
+<div class="light-rays"></div>
+
+<script>
+const canvas = document.getElementById('goldParticles');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const particles = [];
+const particleCount = 80;
+
+function createParticle() {
+  return {
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    size: Math.random() * 2 + 1,
+    speedY: Math.random() * 0.5 + 0.2,
+    alpha: Math.random() * 0.5 + 0.3
+  };
+}
+
+for (let i = 0; i < particleCount; i++) particles.push(createParticle());
+
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for (const p of particles) {
+    ctx.beginPath();
+    ctx.fillStyle = `rgba(212,175,55,${p.alpha})`;
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fill();
+    p.y -= p.speedY;
+    if (p.y < -5) {
+      p.y = canvas.height + 5;
+      p.x = Math.random() * canvas.width;
+    }
+  }
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+</script>
+
+
+<script>
+// Particle Drop Effect
+const particleContainer = document.querySelector('.particles');
+
+function createParticle() {
+  const p = document.createElement('div');
+  p.classList.add('particle');
+
+  // random starting position and animation speed
+  p.style.left = Math.random() * 100 + 'vw';
+  p.style.animationDuration = 4 + Math.random() * 4 + 's';
+  p.style.animationDelay = Math.random() * 2 + 's';
+  p.style.opacity = 0.5 + Math.random() * 0.5;
+  p.style.width = p.style.height = 3 + Math.random() * 4 + 'px';
+
+  particleContainer.appendChild(p);
+  setTimeout(() => p.remove(), 8000);
+}
+
+// Generate particles continuously
+setInterval(createParticle, 300);
+
+</script>
+<style>
+#goldParticles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+</style>
+
+</body>
+</html>
